@@ -1,0 +1,14 @@
+{
+	"name": "bridge",
+	"displayName": "Bridge",
+	"version": "0.1.0",
+	"description": "File-based messaging hub between local Claude Code project sessions (~/.claude/bridge). Ships the bridge-watch skill, the bridge-init onboarding skill, an auto-mounted inbox monitor and the clean-session peer launcher.",
+	"author": {
+		"name": "abgagu"
+	},
+	"license": "MIT",
+	"keywords": ["bridge", "messaging", "inbox", "multi-session", "coordination", "windows"],
+	"experimental": {
+		"monitors": "./monitors/monitors.json"
+	}
+}

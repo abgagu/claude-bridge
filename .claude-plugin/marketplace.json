@@ -1,0 +1,17 @@
+{
+	"$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+	"name": "claude-bridge",
+	"description": "Bridge: file-based messaging hub between local Claude Code project sessions",
+	"owner": {
+		"name": "abgagu"
+	},
+	"plugins": [
+		{
+			"name": "bridge",
+			"source": "./plugins/bridge",
+			"description": "Inbox/outbox between Claude Code sessions on the same machine: skill bridge-watch, onboarding skill bridge-init, auto-mounted inbox monitor, peer launcher",
+			"category": "productivity",
+			"keywords": ["bridge", "messaging", "multi-session", "coordination"]
+		}
+	]
+}

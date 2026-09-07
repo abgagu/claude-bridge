@@ -1,0 +1,8 @@
+[
+	{
+		"name": "inbox",
+		"command": "powershell -NoProfile -File \"${CLAUDE_PLUGIN_ROOT}/scripts/bridge-monitor.ps1\" -Project \"${CLAUDE_PROJECT_DIR}\"",
+		"description": "Bridge inbox: new messages in ~/.claude/bridge/inbox/<id>",
+		"when": "always"
+	}
+]
