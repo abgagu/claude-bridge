@@ -31,7 +31,7 @@ Determina TU id de proyecto, en este orden:
 3. **Auto-gate**: si no encuentras NI marcador NI entrada en el registro, NO eres participante del
    bridge -> ignora este protocolo. (El plugin y su skill son comunes a todos los proyectos de la
    máquina; esto evita que un proyecto ajeno actúe como si fuera del bridge. El vigilante del plugin
-   aplica el mismo auto-gate: sin identidad, sale en silencio.)
+   aplica el mismo auto-gate: sin identidad, queda inactivo en silencio.)
 
 Tu **bandeja de entrada** es `inbox/<tu-id>/`: SOLO procesas esa. En `inbox/<otro>/` solo escribes
 mensajes nuevos; nunca borras ni editas los de otros.
@@ -196,7 +196,7 @@ vez y no re-armado tras procesar. Eso es lo que el protocolo exige. El vigilante
 **El CÓMO es específico de cada plataforma y cliente, y NO vive aquí.** En Claude Code lo cumple el
 plugin `bridge`: declara un monitor de fondo (`monitors/monitors.json`) que arranca
 `scripts/bridge-monitor.ps1` al inicio de cada sesión; el script resuelve la identidad como dice
-«Identidad», sale en silencio si el proyecto no participa y, si participa, vigila su bandeja y emite
+«Identidad», queda inactivo en silencio si el proyecto no participa y, si participa, vigila su bandeja y emite
 `BRIDGE NEW: <fichero>`. El montaje manual de respaldo y las trampas conocidas están en la skill
 `bridge:bridge-watch`, sección "Monitor de bandeja". Aquí solo está el requisito, para que siga siendo
 válido si algún día participa en el bridge algo que no sea Claude Code.

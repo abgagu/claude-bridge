@@ -10,7 +10,9 @@
 # Identidad (BRIDGE.md, "Identidad"), en este orden:
 #   1) marcador .claude-bridge-id en -Project o en un directorio ancestro;
 #   2) entrada de participants.json cuyo path sea prefijo de -Project (gana el prefijo mas largo);
-#   3) ninguna -> este proyecto NO participa en el bridge: sale en silencio con codigo 0 (auto-gate).
+#   3) ninguna -> este proyecto NO participa en el bridge: queda INACTIVO en silencio (auto-gate).
+#      No sale: si el proceso termina, el harness se lo notifica a la sesion y le cuesta un turno en
+#      cada arranque de cada proyecto no participante (verificado 2026-09-07).
 #
 # Un solo vigilante por bandeja y sesion de usuario (mutex con nombre): una segunda sesion sobre el
 # mismo proyecto, o un /reload-plugins con el vigilante anterior aun vivo, avisa y sale en vez de
@@ -61,7 +63,10 @@ function Resolve-BridgeId {
 }
 
 if (-not $Id) { $Id = Resolve-BridgeId }
-if (-not $Id) { exit 0 }   # auto-gate: no participa, sin ruido
+if (-not $Id) {
+	# auto-gate: no participa. Sin salida y SIN terminar (ver cabecera). El harness lo mata al cerrar la sesion.
+	while ($true) { Start-Sleep -Seconds 3600 }
+}
 
 $dir = Join-Path $Root "inbox\$Id"
 if (-not (Test-Path -LiteralPath $dir -PathType Container)) {

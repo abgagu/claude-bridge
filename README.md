@@ -14,7 +14,7 @@ plugins/bridge/
   skills/bridge-watch/SKILL.md    la skill (procesar bandeja, encargar, despertar al coordinador)
   skills/bridge-watch/BRIDGE.md   el protocolo (referencia de la skill)
   skills/bridge-init/SKILL.md     alta asistida de un proyecto
-  scripts/bridge-monitor.ps1      vigilante parametrizado (identidad por marcador o roster, auto-gate, mutex)
+  scripts/bridge-monitor.ps1      vigilante parametrizado (identidad por marcador o roster, auto-gate inactivo, mutex)
   scripts/bridge-monitor.sh       variante POSIX (inotify, con sondeo de respaldo)
   scripts/bridge-open-peer.ps1    abre una sesion LIMPIA de un peer (limpia entorno heredado, NO_COLOR=1)
   templates/ultracode.settings.json
@@ -55,7 +55,9 @@ POSIX funcionan envío, recepción y monitor, pero no hay lanzador.
    al arrancar la sesión la interfaz debe mostrar "1 monitor" del plugin `bridge`.
 2. Con un `.md` en su bandeja, la notificación `BRIDGE NEW:` debe despertar al modelo en reposo y
    disparar `bridge:bridge-watch`.
-3. Proyecto sin marcador ni entrada en el roster: el monitor sale en silencio (nada en la interfaz).
+3. Proyecto sin marcador ni entrada en el roster: el monitor queda inactivo en silencio (sin
+   notificación ni turno del modelo; el proceso sigue vivo hasta el fin de la sesión). Si SALIERA,
+   el harness se lo contaría al modelo y costaría un turno en cada arranque de cada proyecto.
 4. Segunda sesión sobre el mismo proyecto: `BRIDGE WARN: ... already has a watcher`.
 5. `bridge-open-peer.ps1 -Peer <id> -Ultracode`: cabecera con `xhigh effort` y logo gris.
 

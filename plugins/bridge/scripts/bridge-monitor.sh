@@ -4,7 +4,8 @@
 #
 # Usage: bridge-monitor.sh [-p <project-root>] [-i <id>] [-r <state-root>]
 # Identity: 1) .claude-bridge-id marker in -p or an ancestor; 2) participants.json path prefix
-# (needs jq); 3) none -> not a participant: exit 0 silently (auto-gate).
+# (needs jq); 3) none -> not a participant: stay idle silently (auto-gate). Do NOT exit: the harness
+# reports a finished monitor to the session and that costs a model turn on every start.
 set -u
 project="$PWD"; id=""; root="$HOME/.claude/bridge"
 while getopts "p:i:r:" opt; do
@@ -38,7 +39,9 @@ resolve_id() {
 }
 
 [ -z "$id" ] && id="$(resolve_id)"
-[ -z "$id" ] && exit 0   # auto-gate
+if [ -z "$id" ]; then
+	while true; do sleep 3600; done   # auto-gate: idle, no output, no exit
+fi
 
 dir="$root/inbox/$id"
 if [ ! -d "$dir" ]; then

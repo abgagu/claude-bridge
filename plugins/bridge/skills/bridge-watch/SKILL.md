@@ -163,8 +163,9 @@ ls -1 ~/.claude/bridge/inbox/<tu-id>/*.md 2>/dev/null | grep -v '\.tmp$' | sort
 ## Monitor de bandeja
 **Lo monta el plugin, no tú.** `monitors/monitors.json` declara un monitor `always` que arranca
 `${CLAUDE_PLUGIN_ROOT}/scripts/bridge-monitor.ps1` al inicio de cada sesión, con la raíz del proyecto
-como `-Project`. El script resuelve tu id igual que el Paso 1, sale en silencio si el proyecto no
-participa (auto-gate), y si participa vigila `~/.claude/bridge/inbox/<tu-id>/`: emite una línea
+como `-Project`. El script resuelve tu id igual que el Paso 1, se queda inactivo y en silencio si el
+proyecto no participa (auto-gate: ni notificación ni turno), y si participa vigila
+`~/.claude/bridge/inbox/<tu-id>/`: emite una línea
 `BRIDGE NEW: <fichero>` por cada `.md` nuevo (barrido inicial al arrancar + watcher + re-barrido cada
 5 s como red de seguridad, ignorando `*.tmp`). Cada línea llega a la sesión como notificación y dispara
 esta skill. En reposo no emite nada.
