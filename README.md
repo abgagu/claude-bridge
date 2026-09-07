@@ -45,9 +45,10 @@ Validación del paquete: `claude plugin validate C:/workspace/claude-bridge` y
 
 Después, en cada proyecto que vaya a participar: `/bridge:bridge-init` y reiniciar la sesión.
 
-Ojo con los directorios nuevos: la primera sesión en un directorio se queda en el diálogo de confianza
-de carpeta hasta que alguien lo acepta a mano, y el monitor arranca después. Una sesión abierta por
-el lanzador en un proyecto nunca visitado no hace nada (ni monta el monitor) hasta ese clic.
+El alta se hace desde una sesión abierta dentro del proyecto, así que todo participante tiene ya
+aceptada la confianza de carpeta y el lanzador nunca se encuentra ese diálogo. Solo aparece si se
+registra un directorio a mano en el roster saltándose `bridge-init`: la sesión se queda parada en el
+diálogo, sin monitor, hasta que alguien lo acepta.
 
 Requisitos: Claude Code >= 2.1.196 (sustitución de `${CLAUDE_PROJECT_DIR}` en skills); Windows con
 PowerShell y Windows Terminal para el camino de despertar peers (`wt`, ventana `bridge-peers`). En
